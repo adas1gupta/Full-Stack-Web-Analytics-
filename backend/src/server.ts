@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { connectDatabase} from './config/database';
 import PageView from './models/PageView';
+import analyticsRoutes from './routes/analytics';
 
 const app = express();
 const port = 3000;
@@ -27,6 +28,7 @@ async function logPageView(req: express.Request, res: express.Response, next: ex
 }
 
 app.use(logPageView);
+app.use('/api/admin/analytics', analyticsRoutes);
 
 function startServer() {
     connectDatabase();
