@@ -1,4 +1,5 @@
 import PageView from '../models/PageView';
+import { isWeekend } from '../utils/timeUtils';
 
 export async function getTotalPageViews(): Promise<number> {
     try {
@@ -74,6 +75,28 @@ export async function getEveningPageViews(): Promise<number> {
         return await PageView.countDocuments({ timestamp: { $gte: eveningStart, $lte: eveningEnd } });
     } catch (error) {
         console.error('Error fetching evening page views:', error);
+        throw error;
+    }
+}
+
+export async function getWeekendPageViews(): Promise<number> {
+    try {
+        const pageViews = await PageView.find();
+        const weekendPageViews = pageViews.filter(pageView => isWeekend(pageView.timestamp));
+        return weekendPageViews.length;
+    } catch (error) {
+        console.error('Error fetching weekend page views:', error);
+        throw error;
+    }
+}
+
+export async function getWeekdayPageViews(): Promise<number> {
+    try {
+        const pageViews = await PageView.find();
+        const weekdayPageViews = pageViews.filter(pageView => !isWeekend(pageView.timestamp));
+        return weekdayPageViews.length;
+    } catch (error) {
+        console.error('Error fetching weekday page views:', error);
         throw error;
     }
 }
