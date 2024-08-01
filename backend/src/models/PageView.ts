@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-const Document = mongoose.Document;
 
 // These are the structure of documents for MongoDB
 const PageViewSchema = new Schema ({

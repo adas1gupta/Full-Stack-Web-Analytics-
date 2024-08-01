@@ -15,3 +15,5 @@ export async function connectDatabase() {
         console.log('Error:', error)
     }
 }
+
+export const mongoConnection = mongoose.connection;

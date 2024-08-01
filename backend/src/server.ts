@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { connectDatabase} from './config/database';
 import PageView from './models/PageView';
-import analyticsRoutes from './routes/analytics';
+import { sessionConfig } from './config/session';
 
 const app = express();
 const port = 3000;
@@ -10,6 +10,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(sessionConfig);
 
 async function logPageView(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
@@ -28,7 +29,6 @@ async function logPageView(req: express.Request, res: express.Response, next: ex
 }
 
 app.use(logPageView);
-app.use('/api/admin/analytics', analyticsRoutes);
 
 function startServer() {
     connectDatabase();
