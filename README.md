@@ -54,7 +54,7 @@ This project is a fullstack web analytics solution that measures page views for 
 1. Start the backend server:
     ```sh
     cd backend
-    npm run start
+    npm start
     ```
 
 ## API Endpoints
@@ -67,3 +67,5 @@ This project is a fullstack web analytics solution that measures page views for 
     - GET `/analytics/afternoon`: Get afternoon page views
     - GET `/analytics/evening`: Get evening page views
     ```
+
+    Open the command prompt and run a cURL command to see the page views. 
